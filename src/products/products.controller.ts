@@ -30,7 +30,12 @@ export class ProductsController {
   }
 
   @MessagePattern('delete_product')
-  remove(@Param('id', ParseIntPipe) id: number) {
+  remove(@Payload('id', ParseIntPipe) id: number) {
     return this.productsService.remove(id);
+  }
+
+  @MessagePattern('validate_products')
+  validateIds(@Payload() ids: number[]) {
+    return this.productsService.validateIds(ids);
   }
 }
